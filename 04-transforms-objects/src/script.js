@@ -25,7 +25,21 @@ scene.add(mesh)
 
 //To normalize its value
 //mesh.position.normalize();
+const group = new THREE.Scene()
+scene.add(group)
 
+const cube1 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({color:'red'})
+)
+group.add(cube1)
+
+const cube2 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({color:'blue'})
+)
+cube2.position.x = -2
+group.add(cube2)
 
 //Axes Helper - It is a class showing All axes 
 //const axesHelper = new THREE.AxesHelper(1)
