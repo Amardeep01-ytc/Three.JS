@@ -45,6 +45,7 @@ renderer.setSize(sizes.width, sizes.height)
 /**
  * Animate
  */
+//importing GSAP to THREE
 gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 })
 
 const tick = () =>
