@@ -59,6 +59,11 @@ const tick = () =>
     //just play with Math properties
     mesh.position.y = Math.sin(elapsedTime)
     mesh.position.x = Math.cos(elapsedTime)
+
+    //to see Animations with camera
+    camera.position.y = Math.sin(elapsedTime)
+    camera.position.x = Math.cos(elapsedTime)
+    camera.lookAt(mesh.position)
 }
 
 tick()
