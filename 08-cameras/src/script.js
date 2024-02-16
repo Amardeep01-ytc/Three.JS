@@ -82,3 +82,27 @@ const tick = () => {
 
 tick();
 
+//camers: it is abstract class , you're not supposed to use it directly
+//for that we have to inherit from different camera types
+
+/* Array Cameras :
+        Array camera render the scnce from multiple cameras on areas of render
+
+    Stereo Cameras :
+        Stereo Camera render the scence from two cameras that mimic the eyes to careate a parallel effect .
+        use with devices like VR headset, red and blue glasses or cardboard
+
+    Cube Camera : 
+        Cube Camera do 6 renders,each one facing a different directions, one forward,backword,left, right ,top,bottom   
+        It can render surroundings for the things like environment map,reflection or shadow map
+
+    Perspective Camera :
+        Perspective camera render the scence with perspective.  
+
+        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height,1 ,1000)
+        --> in this code, 75 = field of view | it is in degree | also called as 'fov'(field of view) |vertical vision angle
+        --> sizes.width / sizes.height : Aspect Ratio , The width of render divided by height of render | also it can change with very specific situations
+        --> near and far : The third and fourth part of parameters are called near and far, correspond to how close and how far camera can see  
+                            Any object or part of object closer than 'near'or further than 'far' will not show up 
+                            Do not use values like '0.00001' and '999999' to prevent z-fighting (bug, glich)
+
