@@ -106,3 +106,36 @@ tick();
                             Any object or part of object closer than 'near'or further than 'far' will not show up 
                             Do not use values like '0.00001' and '999999' to prevent z-fighting (bug, glich)
 
+    
+    
+    Orthographic Camera :
+        Orthographic camera render the scence without perspective.
+        i.e, if object is far from the camera, it will have the same size of same object and it is very close to camera
+        Orthographic Camera differs from Persepective camera by it's lack of perspective 
+        Objects has the same size regardless of their distance to camera
+        Insted field of view, we provide how far the camera can see in each direction(left,right,top and bottom).Then the 'near' and 'far'
+
+    Control Camera with mouse :
+        -If we want to control the position of camera with mouse
+        -First we need the mouse co-ordinates on the page 
+        -Listen to the 'mousemove' event with 'addEventListener' and retrieve the 'event.clientX' and 'event.clientY'
+        const cursor ={
+    x : 0,
+    y : 0
+}
+window.addEventListener('mousemove',(event) =>
+{
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y = -(event.clientY / sizes.width - 0.5)
+    // console.log(cursor.x, cursor.y) 
+})
+
+ //Update Camera in the tick function --   with this we can see only from top bottom and from side but we cannot see behind the cube
+
+    camera.position.x = cursor.x * 10
+    camera.position.y = cursor.y * 10
+    camera.lookAt(mesh.position)
+
+
+*/
+
