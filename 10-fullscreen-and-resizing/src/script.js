@@ -156,6 +156,7 @@ HANDEL PIXEL RATIO ==>
     - To get the current pixel retio, we can use window.devicePixelRatio to our console
     - To update the renderer accordingly, we can use "renderer.setPixelRatio(window.devicePixelRatio)"
     - renderre.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    - If your screen's Pixel Ratio is 1 then you don't have to change anything with script just add renderre.setPixelRatio(window.devicePixelRatio)
 
 
 HANDEL FULL SCREEN ==>
