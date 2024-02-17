@@ -114,3 +114,5 @@ const tick = () =>
 }
 
 tick()
+
+//this is final Full Scrren view where we can get directly Full Screen as starter pack...
