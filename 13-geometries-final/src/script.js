@@ -93,6 +93,3 @@ const tick = () =>
 }
 
 tick()
-
-//this is not a starter pack , this is end of chaapter geometrics 
-// if you want to take data from geometrics get back to 12th folder
