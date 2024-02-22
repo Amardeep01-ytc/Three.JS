@@ -157,3 +157,63 @@ const tick = () =>
 
 tick()
 
+/*
+We only used the 'BoxGeometry' but there are many other Geometries
+But what is Geometry in THREE.JS?
+-Composed of vertices (point coordinates in 3D spaces) and faces (triangles that join those vertices to create a surface)
+-Can be used for meshes but also for particles
+-Can store more data than the positions(UV coordinates, normals, colors or anything we want)
+
+All the following geometries inherit from "Geometry"
+This class has many builtin methods like transalte(...),rotateX(...),rotateY(...),normalize(...)
+
+Types:
+BoxGeometry - BoxGeometry is a geometry class for a rectangular cuboid with a given 'width','height' and 'dephth'. On creation,the cuboid is centred on the origin,
+            with each edge parallel to one of the axes
+    
+PlaneGeometry - A class for generating plane geometrics (eg two triangles combined and make one square but it look only by one side)
+
+CircleGeometry - CircleGeometry is a shape of Euclidean geometry with lots of parameters.
+            -it is bulit counter-clockwise from a start angle and givenc central angle.
+            -it is used to create regular polygones,where the number of segmemts determines the number of sides
+
+ConeGeometry - A class for generating cone geometries
+
+CyliderGeometry - A class for generating cylinder geometries(eg.Anything which is in the form of cylinders we can made that like base of rocket and may more)
+
+RingGeometry -  A class for generating two-dimensional ring geometry.
+
+TorusGeometry - A class for generating torus geometries.(we can say that ring in 3-D form)
+
+TorusKnotGeometry - Creates a torus knot, the particular shape of which is defined by a pair of coprime integers,p and q.
+                - If p and q are not coprime, the result will be a torus link.
+
+DodecahedronGeometry - A class for generating a dodecahedron geometry 
+                    - Like a raw diamond shape
+    
+OctahedronGeometry - A class for generating an octahedron geometry
+
+TetrahedronGeometry - A class for generating an tetranhedron geometry
+
+IcosahedronGeometry - A class for generating an icosahedron geometry
+                    - same as Tetrahedron geometry
+
+SphereGeometry - A class for generating sphere geometries(used to make planet or football and stuff like that)
+
+ShapeGeometry - Creates an one-sided polygonal geometry from one or more path shapes
+              -it is basically made on curves (eg. heart shape)
+
+TubeGeometry - Creates a tube that extrudes along 3-D curves(used in wires and rooler-coster ride structures like that)
+
+ExtrudeGeometry - Creates extruded geometry from apath shape.
+
+LatheGeometry - Creates meshes with axial symmetry like varses. The lathe rotates around the Y axis.
+
+TextGeometry - A class for generating text as a single geometry. It is constructed by providing a string of text and a hash of parameters consisting of a loaded Font and settings for the geometry's parent ExtrudeGeometry.
+            - See the Font,FontLoader and [page:Creating-Text] pages for additional details.
+
+By comining those, we can create pretty complex shapes 
+-eg if we want to create a house we dont have houseGeometry so at that time we have other Geometries to create a house
+
+*/
+
