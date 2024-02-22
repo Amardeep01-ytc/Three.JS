@@ -217,3 +217,156 @@ By comining those, we can create pretty complex shapes
 
 */
 
+
+
+/*
+In the Square Example ,
+
+we have total 6 parameters 
+- width : The size on the x axis
+- height : The size on the y axis
+- depth : The size on the z axis
+- widthSegments : How many subdivisions in the x axis
+- heightSegments : How many subdivsions in the y axis
+- depthSegments : How many subdivisions in the z axis
+
+Subdivisions corresponds to how much triangles should compose a face 
+- 1 = 2 triangles per face
+- 2 = 8 triangles per face
+const geometry = nwe THREE.BoxGeometry (1,1,1,2,2,2)
+The problem is that we cannot see these triangles  
+
+It doesnt change with the square 
+- So we can you wirefrme: true onn the material 
+const material = new THREE.MeshBasicMaterial({
+    color : red, 
+    wireframe :true
+})
+
+
+WE Can Create our own Geometry :- 
+We ca create our geometry 
+If the geometry is very complex and specific, we can also use a 3D software 
+Create an empty geometry with 'Geometry'
+const geometry = new THREE.Geometry()
+
+We are going to use vector3 to create vertices and put them in the vertoces array 
+const vertex1 = new THREE.Vector3(0, 0, 0)
+geometry.vertices.push(vertex1)
+ 
+const vertex2 = new THREE.Vector3(0, 1, 0)
+geometry.vertices.push(vertex2)
+ 
+const vertex3 = new THREE.Vector3(1, 0, 0)
+geometry.vertices.push(vertex3)
+
+Now, we can create a face using the Face3 and add it to the face array
+// const face = new THREE.Face3(0, 1, 2)
+// geometry.faces.push(face)
+
+geometry.faces.push(new THREE.Face3(0,1,2))
+we can write any of them for faces and here, the Face3 contains the indexes of the vertices
+
+THAt was a lot of efforts just to create a mere triangle 
+Let's create a bunch of random triangles 
+const geometry = new THREE.BoxGeometry(1, 1, 1,2, 2, 2)
+for(let i = 0; i < 50 ; i++)
+{
+    for(let j=0 ; j < 3; j++)
+    {
+        geometry.vertices.push(new THREE.Vector3(
+        (Math.random() - 0.5) * 4,//x-axis
+        (Math.random() - 0.5) * 4,//y-axis
+        (Math.random() - 0.5) * 4 //z-axis
+        ))
+    }
+    const verticesIndex = i * 3
+    geometry.faces.push(new THREE.Face3(
+        verticesIndex,
+        verticesIndex + 1,
+        verticesIndex + 2
+    ))
+}
+
+Buffer Geometry - 
+    - While wandering the Three.js documentation, you probably came across"BufferGeometr"
+    - Buffer geometries are more efficient and optimized but less developer-friendly.
+    - Most of the geometries we saw earlier have a buffer version 
+    eg.const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
+   
+things are getting little harder when we  create our own buffer geometry 
+--CREATING OUR OWN BUFFER GEOMETRY :
+    - Before Creating the geometry, we need to understand how to store buffer geometry data
+    - we are going to use Float32Array (to store data)
+    - Typed array 
+    - can only store floats
+    - Fixed length
+    - Easier to handel for the computer
+  There are two ways of creating and filling a Float32Array
+  1. Specify the length and then fill the array
+      const positionsArray = new Float32Array(9)
+
+        //first vertices
+        positionsArray[0] = 0
+        positionsArray[1] = 0
+        positionsArray[2] = 0
+
+        //second vertices
+        positionsArray[3] = 0
+        positionsArray[4] = 1
+        positionsArray[5] = 0
+
+        //third vertices
+        positionsArray[6] = 1
+        positionsArray[7] = 0
+        positionsArray[8] = 0
+
+  2. Second way to create own buffer geometry(By using array)
+    const positionsArray = new Float32Array([
+    0, 0, 0, //first vertices
+    0, 1, 0, //second vertices
+    1, 0, 0  //third vertices
+    ])
+    It's a one dimension array where the first 3 values are the x,y,z coordinates of the first vertex   
+    The next 3 values are x,y,z coordinates of the second vertex and on going
+
+Then we can convert that Float32Array to a BufferAttribute
+ const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
+3 corresponds to how much values compose one vertex
+ 
+we can add this BufferAttribute to our BufferGeometry with setAttribute(...)
+     geometry.setAttribute('position' , positionAttribute )
+position is the name that will be used in the shaders
+const positionsArray = new Float32Array([
+    0, 0, 0, //first vertices
+    0, 1, 0, //second vertices
+    1, 0, 0  //third vertices
+])
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
+
+const geometry = new THREE.BufferGeometry()
+geometry.setAttribute('position', positionsAttribu
+
+
+
+We can also create a bunch of random trianglesconst geometry = new THREE.BufferGeometry()
+
+    const count = 100 
+    const positionsArray = new Float32Array(count * 3 * 3)
+
+    for(let i = 0; i < count * 3 *3; i++)
+    {
+        positionsArray [i]= (Math.random()- 0.5)*4
+    }
+
+    const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3 )
+    geometry.setAttribute('position', positionsAttribute)
+
+
+Index - 
+    -Some geometry have faces that share common vertices
+    -when creating a BufferGeometry we can specify a bunch of vertices and then the indices to create the faces and re-use vertices multiple times
+     - we are not going to cover this here.
+
+*/
+
