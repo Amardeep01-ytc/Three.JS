@@ -368,5 +368,8 @@ Index -
     -when creating a BufferGeometry we can specify a bunch of vertices and then the indices to create the faces and re-use vertices multiple times
      - we are not going to cover this here.
 
+ These are the final notes of Geomerics
+ 
+
 */
 
