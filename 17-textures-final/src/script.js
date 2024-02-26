@@ -146,3 +146,4 @@ const tick = () =>
 }
 
 tick()
+//This is the final topic of textures 
