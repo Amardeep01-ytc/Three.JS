@@ -40,3 +40,4 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
 
 //This is the final part of webpack 
+//WE can use directly as a webpack
