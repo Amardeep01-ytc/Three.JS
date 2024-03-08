@@ -145,7 +145,6 @@ const tick = () =>
     window.requestAnimationFrame(tick)
 }
 tick()
-//This is the final topic of textures 
 
 /*
 OFFSET :
@@ -209,6 +208,7 @@ Magnification Filter :
         colorTexture.generatingMipmaps = false
         colorTexture.minFilter = THREE.Nearest Filter 
 
+//This is the final topic of textures 
 
 
 */
