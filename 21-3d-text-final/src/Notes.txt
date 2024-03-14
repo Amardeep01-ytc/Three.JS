@@ -1,0 +1,127 @@
+3D Text :
+    We create a big 3D text in the moiddle of the scence with objects floating around
+
+We are going to use the TextBufferGeometry class but we need a particular font format called typeface 
+How to get a TypeFace font :
+    - we can convert font with tools like https://gero3.github.io/facetype.js/ 
+    - We can also use fonts provided by Three.js 
+      Go to the /node_modules/three/examples/fonts/ folder
+      We can take the font and put them in the /static/ folder or we can import them directly.
+         import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
+    
+    - We will mix those two technics
+        *Open /node_modules/three/examples/fonts/
+        *Take the helvetiker_regular.typeface.json and LICENSE file
+        *Put them in the /static/fonts/ folder
+    The font is now accessible at the /fonts/helvetiker_regular.typeface.json URL
+
+Load The Font :
+    To load the font,we need fontloader 
+    const fontLoader = new THREE.FontLoader()
+    fontLoader.load( 
+    /fonts/helvetiker_regular.typeface.json',
+    ()=>
+    {
+     console.log('font Loaded')
+    }
+    )
+
+Create a Geometry :
+    - We are going to use TextBufferGeometry
+    const fontLoader = new THREE.FontLoader()
+
+    fontLoader.load( 
+        '/fonts/helvetiker_regular.typeface.json',
+        (font)=>
+        {
+            const textGeometry = new THREE.TextBufferGeometry(
+                'Hello THREE JS',
+                {
+                
+                    font : font,
+                    size : 0.5,
+                    height : 0.2,
+                    curveSegments : 5,
+                    bevelEnabled : true,
+                    bevelThickness : 0.03,
+                    bevelSize : 0.02,
+                    bevelOffset : 0,
+                    bevelSegments : 5
+                }
+               )
+               const textMaterial = new THREE.MeshBasicMaterial()
+               const text = new THREE.Mesh(textGeometry, textMaterial)
+               scene.add(text)
+        } 
+    - We can test the Geometry by adding wireframe: true to oue material 
+        const textmaterial = new THREE.MeshBasicMaterial({wireframe : true})
+    - Creating a text geometry is long and hard for the computer 
+      Avoid doing it too many times and keep the geometry as low as possible by reducing the curveSegments and bevelSegments
+      Remove the wireframe once happy with the level of details
+    
+Center the Text :
+    Type 1 :- Using The Bounding 
+            - The bounding is an information associated with the geometry that tells what space is taken by that geometry. It can br box or a sphere
+            - It helps Three.js calculate if the object is on the screen (frustum culling)
+              We are going to use the bounding measures to recenter the geometry 
+            - By default, Three.js is using sphere biuding 
+              calculate the box bounding with computeBoundingBox() 
+              textGeometry.computeBoundingBox()
+              console.log(textGeometry.boundingBox)
+            - The result is an instance of Box3 with min abd max proprties 
+               The min property isn't at 0 because of the bevelThickness and bevelSize
+            - Instead of moving the mesh, we are going to move the whole geometry with translate(...)
+                textGeometry.translate(
+                - textGeometry.boundingBox.max.x * 0.5,
+                - textGeometry.boundingBox.max.y * 0.5,
+                - textGeometry.boundingBox.max.z * 0.5
+                )
+            - The text loooks centered but its's not because of the bevelThickness and bevelSize
+                textGeometry.translate(
+                - (textGeometry.boundingBox.max.x - 0.02) * 0.5,
+                - (textGeometry.boundingBox.max.y - 0.02) * 0.5,
+                - (textGeometry.boundingBox.max.z - 0.03) * 0.5
+                )
+    Type 2 :- Using Center()
+            - Call the center() method on the geometry
+                textGeometry.center()
+    We are going to use MeshMatcapMaterial 
+     We can use the matcaps in the /static/textures/matcaps/ folder
+     Load the TextureLoader :
+     const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
+    We can now replace our MeshBasicMaterial by a MeshMatcapMaterial and use our matcapTexture variable with the matcap property
+       const textMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture})
+ 
+Add Objects :
+    - WE will create 100 torus
+       for(let i = 0; i < 100 ; i++)
+           {
+            const torusGeometry = new THREE.TorusBufferGeometry(0.3, 0.2, 20, 45)
+            const torusMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture })
+            const torus = new THREE.Mesh(torusGeometry, torusMaterial)
+            scene.add(torus)
+           }
+    - Lets add some randomness in their positions
+
+        torus.position.x = (Math.random() - 0.5) * 10
+        torus.position.y = (Math.random() - 0.5) * 10
+        torus.position.z = (Math.random() - 0.5) * 10
+
+    - Add randomness in the rotation
+        torus.rotation.x = Math.random() * Math.PI 
+        torus.rotation.y = Math.random() * Math.PI 
+    
+    - add randomness in their scale
+        const scale = Math.random()
+        torus.scale.set(scale, scale, scale)
+
+    - Optimize 
+        We can use the same material and the same geometry on multiple Meshes
+        const torusGeometry = new THREE.TorusBufferGeometry(0.3, 0.2, 20, 45)
+            const torusMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture })
+
+            for(let i = 0; i < 100 ;i++)
+            {
+                //....
+            }
+        
